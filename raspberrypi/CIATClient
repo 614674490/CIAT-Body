@@ -1,0 +1,27 @@
+#! /bin/bash
+### BEGIN INIT INFO
+# Provider: wang
+# Required-Start: $remote_fs
+# Required-Stop: $remote_fs
+# Default-Start:2 3 4 5
+# Default-Stop:0 1 6
+# Short-Description:Remote control pi car
+# Description:This service is used to start or stop Pi car programs
+### END INIT INFO
+case "$1" in
+    start)
+      ech0 "Starting CIATClient"
+      cd /home/pi/Work/CIAT_Body/raspberrypi/
+      sh CIAT-Body.sh &
+      ;;
+    stop)
+      ech0 "Stopping CIATClient"
+      sudo killall CIAT_Body
+      sudo killall CIATClient
+      ;;
+    *)
+      echo "Usage:service CIATClient start|stop"
+      exit 1
+      ;;
+esac
+exit 0
